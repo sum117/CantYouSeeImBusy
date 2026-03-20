@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <ThoughtDef>
+    <defName>CYSIB_FocusedThought</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>CYSIB_Focused</hediff>
+    <validWhileDespawned>false</validWhileDespawned>
+    <stages>
+      <li>
+        <label>focused</label>
+        <description>Adrenaline and discipline are keeping this colonist sharp during the fight.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- Hediff: Focused combat state indicator -->
+  <!-- Note: HediffDef and ThoughtDef use inline label/description. -->
+  <!-- This file exists for hediff-related keyed strings referenced from C# code. -->
+  <CYSIB_Focused_Label>Focused</CYSIB_Focused_Label>
+
+</LanguageData>
