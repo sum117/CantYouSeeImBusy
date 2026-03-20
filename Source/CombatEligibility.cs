@@ -18,6 +18,7 @@ namespace CantYouSeeImBusy
         public static bool IsProtected(Pawn pawn)
         {
             if (pawn?.Map == null) return false;
+            if (!CantYouSeeImBusyMod.Settings.ModEnabled) return false;
             if (!pawn.IsColonist) return false;
             if (pawn.Downed) return false;
             if (pawn.WorkTagIsDisabled(WorkTags.Violent)) return false;

@@ -46,6 +46,15 @@ namespace CantYouSeeImBusy
         public static void Reconcile(Map map)
         {
             List<Pawn> colonists = map.mapPawns.FreeColonistsSpawned;
+
+            // If mod disabled, remove ALL Focused hediffs and bail out
+            if (!CantYouSeeImBusyMod.Settings.ModEnabled)
+            {
+                for (int i = 0; i < colonists.Count; i++)
+                    RemoveFrom(colonists[i]);
+                return;
+            }
+
             for (int i = 0; i < colonists.Count; i++)
             {
                 Pawn pawn = colonists[i];

@@ -17,6 +17,8 @@ namespace CantYouSeeImBusy
             MentalStateDef stateDef,
             ref bool __result)
         {
+            if (!CantYouSeeImBusyMod.Settings.ModEnabled) return true;
+
             Pawn pawn = (Pawn)PawnField.GetValue(__instance);
 
             // If not protected, allow the original method to run
