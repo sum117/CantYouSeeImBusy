@@ -9,7 +9,8 @@ namespace CantYouSeeImBusy
         public bool InCombat { get; private set; }
 
         private Dictionary<int, int> _gracePeriodStartTick = new Dictionary<int, int>();
-        private const int GracePeriodTicks = 125;
+        private HashSet<int> _wasDrafted = new HashSet<int>();
+        private const int GracePeriodTicks = 300; // ~5 seconds at 1x speed (60 tps); must exceed 150-tick need interval
 
         private Dictionary<int, int> _lastLetterTick = new Dictionary<int, int>();
         private const int LetterThrottleTicks = 500;
@@ -31,16 +32,33 @@ namespace CantYouSeeImBusy
             return GetFor(map)?.InCombat ?? false;
         }
 
-        public void StartGracePeriod(Pawn pawn)
+        public void TrackDrafted(Pawn pawn)
         {
             if (pawn == null) return;
-            _gracePeriodStartTick[pawn.thingIDNumber] = Find.TickManager.TicksGame;
+            _wasDrafted.Add(pawn.thingIDNumber);
+        }
+
+        public bool TryStartGracePeriod(Pawn pawn)
+        {
+            if (pawn == null) return false;
+            int id = pawn.thingIDNumber;
+            if (!_wasDrafted.Remove(id)) return false;
+            if (_gracePeriodStartTick.ContainsKey(id)) return false;
+            _gracePeriodStartTick[id] = Find.TickManager.TicksGame;
+            return true;
         }
 
         public void ClearGracePeriod(Pawn pawn)
         {
             if (pawn == null) return;
             _gracePeriodStartTick.Remove(pawn.thingIDNumber);
+        }
+
+        public void ClearAllTracking(Pawn pawn)
+        {
+            if (pawn == null) return;
+            _gracePeriodStartTick.Remove(pawn.thingIDNumber);
+            _wasDrafted.Remove(pawn.thingIDNumber);
         }
 
         public bool IsInGracePeriod(Pawn pawn)

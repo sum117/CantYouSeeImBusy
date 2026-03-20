@@ -39,16 +39,24 @@ namespace CantYouSeeImBusy
             {
                 if (pawn.IsColonist && !pawn.Downed && !pawn.WorkTagIsDisabled(WorkTags.Violent))
                 {
-                    if (!pawn.Drafted)
-                        cache.StartGracePeriod(pawn);
-                    else
+                    if (pawn.Drafted)
+                    {
+                        // Pawn is drafted: track for grace period transition, clear any active grace
+                        cache.TrackDrafted(pawn);
                         cache.ClearGracePeriod(pawn);
+                    }
+                    else
+                    {
+                        // Pawn is undrafted: start grace period ONLY if transitioning from drafted
+                        // TryStartGracePeriod returns false if pawn was never drafted or already in grace
+                        cache.TryStartGracePeriod(pawn);
+                    }
                 }
             }
             else if (cache != null)
             {
-                // Combat ended: clear any stale grace period entries
-                cache.ClearGracePeriod(pawn);
+                // Combat ended: clear all tracking for this pawn
+                cache.ClearAllTracking(pawn);
             }
 
             // Now check full eligibility (includes grace period)

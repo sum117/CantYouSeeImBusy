@@ -13,7 +13,7 @@ namespace CantYouSeeImBusy
         ///   - Not downed
         ///   - Not incapable of violence (WorkTags.Violent)
         ///   - Map has active hostile threat (via CombatStateCache)
-        ///   - Currently drafted OR within 125-tick undraft grace period
+        ///   - Currently drafted OR within 300-tick undraft grace period
         /// </summary>
         public static bool IsProtected(Pawn pawn)
         {
