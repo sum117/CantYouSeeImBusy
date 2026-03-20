@@ -18,11 +18,19 @@ namespace CantYouSeeImBusy
         private int _reconcileTick = 0;
         private const int ReconcileInterval = 60; // ~1 second at 1x speed (60 tps)
 
+        private int _combatCheckTick = 0;
+        private const int CombatCheckInterval = 30; // ~0.5 seconds at 1x speed (60 tps)
+
         public CombatStateCache(Map map) : base(map) { }
 
         public override void MapComponentTick()
         {
-            InCombat = GenHostility.AnyHostileActiveThreatToPlayer(map);
+            _combatCheckTick++;
+            if (_combatCheckTick >= CombatCheckInterval)
+            {
+                _combatCheckTick = 0;
+                InCombat = GenHostility.AnyHostileActiveThreatToPlayer(map);
+            }
 
             _reconcileTick++;
             if (_reconcileTick >= ReconcileInterval)

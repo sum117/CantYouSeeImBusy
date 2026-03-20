@@ -6,6 +6,7 @@
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
+  <modVersion>1.0.1</modVersion>
   <description>
     When a raid hits and your colonists are drafted, Can't You See I'm Busy freezes need decay and blocks mental breaks, so they fight instead of wandering off for a snack. Needs resume exactly where they left off when combat ends.
   </description>

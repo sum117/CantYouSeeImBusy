@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using Verse;
@@ -9,12 +8,6 @@ namespace CantYouSeeImBusy
     [HarmonyPatch(typeof(Pawn_NeedsTracker), nameof(Pawn_NeedsTracker.NeedsTrackerTickInterval))]
     public static class Patch_NeedsTrackerTickInterval
     {
-        private static readonly FieldInfo _pawnField =
-            AccessTools.Field(typeof(Pawn_NeedsTracker), "pawn");
-
-        private static readonly FieldInfo _needsField =
-            AccessTools.Field(typeof(Pawn_NeedsTracker), "needs");
-
         /// <summary>
         /// Prefix: Snapshots all need levels before the vanilla loop runs.
         /// Uses object-reference snapshot (not index-based) to avoid mismatch
@@ -22,54 +15,52 @@ namespace CantYouSeeImBusy
         /// Also manages grace period state transitions for undrafted pawns.
         /// Never returns false -- preserves other mods' patches.
         /// </summary>
-        public static void Prefix(Pawn_NeedsTracker __instance, int delta, ref (Need need, float level)[]? __state)
+        public static void Prefix(Pawn_NeedsTracker __instance, Pawn ___pawn, List<Need> ___needs, int delta, ref (Need need, float level)[]? __state)
         {
             __state = null;
 
-            Pawn pawn = (Pawn)_pawnField.GetValue(__instance);
-            if (pawn == null) return;
+            if (___pawn == null) return;
 
-            // Guard: only do work on the 150-tick hash interval (same gate as the original)
-            if (!pawn.IsHashIntervalTick(150, delta)) return;
+            // Guard: only do work on the 150-tick hash interval
+            if (!___pawn.IsHashIntervalTick(150, delta)) return;
 
             // Handle grace period state transitions BEFORE the eligibility check
             // so grace period starts/clears are tracked even for partially-eligible pawns
-            CombatStateCache? cache = CombatStateCache.GetFor(pawn.Map);
+            CombatStateCache? cache = CombatStateCache.GetFor(___pawn.Map);
             if (cache != null && cache.InCombat)
             {
-                if (pawn.IsColonist && !pawn.Downed && !pawn.WorkTagIsDisabled(WorkTags.Violent))
+                if (___pawn.IsColonist && !___pawn.Downed && !___pawn.WorkTagIsDisabled(WorkTags.Violent))
                 {
-                    if (pawn.Drafted)
+                    if (___pawn.Drafted)
                     {
                         // Pawn is drafted: track for grace period transition, clear any active grace
-                        cache.TrackDrafted(pawn);
-                        cache.ClearGracePeriod(pawn);
+                        cache.TrackDrafted(___pawn);
+                        cache.ClearGracePeriod(___pawn);
                     }
                     else
                     {
                         // Pawn is undrafted: start grace period ONLY if transitioning from drafted
                         // TryStartGracePeriod returns false if pawn was never drafted or already in grace
-                        cache.TryStartGracePeriod(pawn);
+                        cache.TryStartGracePeriod(___pawn);
                     }
                 }
             }
             else if (cache != null)
             {
                 // Combat ended: clear all tracking for this pawn
-                cache.ClearAllTracking(pawn);
+                cache.ClearAllTracking(___pawn);
             }
 
             // Now check full eligibility (includes grace period)
-            if (!CombatEligibility.IsProtected(pawn)) return;
+            if (!CombatEligibility.IsProtected(___pawn)) return;
 
             // Snapshot need levels by object reference (not by index)
-            var needs = (List<Need>?)_needsField.GetValue(__instance);
-            if (needs == null) return;
+            if (___needs == null) return;
 
-            __state = new (Need, float)[needs.Count];
-            for (int i = 0; i < needs.Count; i++)
+            __state = new (Need, float)[___needs.Count];
+            for (int i = 0; i < ___needs.Count; i++)
             {
-                __state[i] = (needs[i], needs[i].CurLevel);
+                __state[i] = (___needs[i], ___needs[i].CurLevel);
             }
         }
 
