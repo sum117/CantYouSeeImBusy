@@ -21,4 +21,19 @@
   <!-- Settings page: reset button -->
   <CYSIB_Settings_ResetDefaults>Reset to Defaults</CYSIB_Settings_ResetDefaults>
 
+  <!-- Settings page: protection options section header -->
+  <CYSIB_Settings_ProtectionOptions>Protection Options</CYSIB_Settings_ProtectionOptions>
+
+  <!-- Settings page: breakdown blocking toggle -->
+  <CYSIB_Settings_BlockBreakdowns>Block mental breaks during combat</CYSIB_Settings_BlockBreakdowns>
+  <CYSIB_Settings_BlockBreakdowns_Tooltip>When enabled, colonists in combat will not have mental breaks. Need decay is unaffected by this setting.</CYSIB_Settings_BlockBreakdowns_Tooltip>
+
+  <!-- Settings page: cube override toggle (only shown with Anomaly DLC) -->
+  <CYSIB_Settings_AllowCubeBreaks>Allow Cube sculpting breaks</CYSIB_Settings_AllowCubeBreaks>
+  <CYSIB_Settings_AllowCubeBreaks_Tooltip>When enabled, colonists with Cube addiction can still have Cube sculpting breaks during combat, even if mental break blocking is on.</CYSIB_Settings_AllowCubeBreaks_Tooltip>
+
+  <!-- Settings page: caravan formation freeze toggle -->
+  <CYSIB_Settings_FreezeCaravanNeeds>Freeze needs during caravan formation</CYSIB_Settings_FreezeCaravanNeeds>
+  <CYSIB_Settings_FreezeCaravanNeeds_Tooltip>When enabled, colonist needs are frozen while forming a caravan. Mental break blocking (if enabled) also applies during caravan formation.</CYSIB_Settings_FreezeCaravanNeeds_Tooltip>
+
 </LanguageData>

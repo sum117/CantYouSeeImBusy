@@ -1,4 +1,5 @@
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace CantYouSeeImBusy
@@ -27,6 +28,26 @@ namespace CantYouSeeImBusy
             if (cache == null || !cache.InCombat) return false;
 
             return pawn.Drafted || cache.IsInGracePeriod(pawn);
+        }
+
+        /// <summary>
+        /// Returns true when this pawn should receive caravan formation protection
+        /// (need freeze + mental break blocking during caravan loading).
+        /// Conditions (ALL must be true):
+        ///   - Player colonist
+        ///   - Mod enabled globally
+        ///   - FreezeCaravanNeeds setting enabled
+        ///   - Pawn is currently forming a caravan (lord is LordJob_FormAndSendCaravan)
+        /// Note: Unlike IsProtected, does NOT check Downed or Violence WorkTag.
+        /// Caravan protection is a parallel path, not combat protection.
+        /// </summary>
+        public static bool IsCaravanProtected(Pawn pawn)
+        {
+            if (pawn?.Map == null) return false;
+            if (!CantYouSeeImBusyMod.Settings.ModEnabled) return false;
+            if (!CantYouSeeImBusyMod.Settings.FreezeCaravanNeeds) return false;
+            if (!pawn.IsColonist) return false;
+            return pawn.IsFormingCaravan();
         }
     }
 }

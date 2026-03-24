@@ -53,6 +53,15 @@ About/                 Mod metadata + preview image
 Languages/English/     Keyed translation strings
 ```
 
-## License
+## Building
 
-All rights reserved.
+```bash
+dotnet build "1.6/Source/CantYouSeeImBusy.csproj" --no-restore
+```
+
+| Flag | Purpose |
+|------|---------|
+| `"1.6/Source/CantYouSeeImBusy.csproj"` | Path to the project file. Quoted because the path may contain spaces. |
+| `--no-restore` | Skips NuGet package restore. This project has no NuGet dependencies — all references are local DLLs (RimWorld, Unity, Harmony) — so the restore step is unnecessary. |
+
+The compiled DLL is output to `1.6/Assemblies/` as configured by the `<OutputPath>` in the csproj.

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace CantYouSeeImBusy
@@ -52,7 +53,7 @@ namespace CantYouSeeImBusy
             }
 
             // Now check full eligibility (includes grace period)
-            if (!CombatEligibility.IsProtected(___pawn)) return;
+            if (!CombatEligibility.IsProtected(___pawn) && !CombatEligibility.IsCaravanProtected(___pawn)) return;
 
             // Snapshot need levels by object reference (not by index)
             if (___needs == null) return;

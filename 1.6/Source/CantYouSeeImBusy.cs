@@ -30,7 +30,7 @@ namespace CantYouSeeImBusy
                 .ToList();
 
             // Estimate view height: toggle(30) + header(30) + disabled msg(30) + gap(12) + buttons row(30) + gap(12) + per-need(34 each) + gap(12) + reset button(30) + padding(30)
-            float viewHeight = 216f + sortedNeeds.Count * 34f;
+            float viewHeight = 348f + sortedNeeds.Count * 34f;
             Rect viewRect = new Rect(0f, 0f, inRect.width - 30f, viewHeight);
 
             Widgets.BeginScrollView(inRect, ref _scrollPosition, viewRect);
@@ -93,12 +93,45 @@ namespace CantYouSeeImBusy
 
             GUI.enabled = prevEnabled;
 
+            // --- Protection Options section ---
+            ls.GapLine();
+            ls.Label("CYSIB_Settings_ProtectionOptions".Translate());
+
+            bool prevEnabled2 = GUI.enabled;
+            GUI.enabled = Settings.ModEnabled;
+
+            ls.CheckboxLabeled(
+                "CYSIB_Settings_BlockBreakdowns".Translate(),
+                ref Settings.BlockBreakdowns,
+                "CYSIB_Settings_BlockBreakdowns_Tooltip".Translate()
+            );
+
+            if (ModsConfig.AnomalyActive)
+            {
+                ls.CheckboxLabeled(
+                    "CYSIB_Settings_AllowCubeBreaks".Translate(),
+                    ref Settings.AllowCubeBreaks,
+                    "CYSIB_Settings_AllowCubeBreaks_Tooltip".Translate()
+                );
+            }
+
+            ls.CheckboxLabeled(
+                "CYSIB_Settings_FreezeCaravanNeeds".Translate(),
+                ref Settings.FreezeCaravanNeeds,
+                "CYSIB_Settings_FreezeCaravanNeeds_Tooltip".Translate()
+            );
+
+            GUI.enabled = prevEnabled2;
+
             ls.GapLine();
 
             // Reset to Defaults button
             if (ls.ButtonText("CYSIB_Settings_ResetDefaults".Translate()))
             {
                 Settings.NeedDecayRates.Clear();
+                Settings.BlockBreakdowns = true;
+                Settings.AllowCubeBreaks = false;
+                Settings.FreezeCaravanNeeds = false;
             }
 
             ls.End();
@@ -109,6 +142,9 @@ namespace CantYouSeeImBusy
     public class CantYouSeeImBusySettings : ModSettings
     {
         public bool ModEnabled = true;
+        public bool BlockBreakdowns = true;           // SETT-01: default ON preserves v1.0 behavior
+        public bool AllowCubeBreaks = false;          // SETT-02: default OFF, new opt-in feature
+        public bool FreezeCaravanNeeds = false;       // SETT-03: default OFF, new opt-in feature
         public Dictionary<string, float> NeedDecayRates = new Dictionary<string, float>();
 
         public float GetDecayRate(NeedDef def)
@@ -121,6 +157,9 @@ namespace CantYouSeeImBusy
         {
             base.ExposeData();
             Scribe_Values.Look(ref ModEnabled, "ModEnabled", true);
+            Scribe_Values.Look(ref BlockBreakdowns, "BlockBreakdowns", true);
+            Scribe_Values.Look(ref AllowCubeBreaks, "AllowCubeBreaks", false);
+            Scribe_Values.Look(ref FreezeCaravanNeeds, "FreezeCaravanNeeds", false);
             Scribe_Collections.Look(ref NeedDecayRates, "NeedDecayRates", LookMode.Value, LookMode.Value);
             NeedDecayRates ??= new Dictionary<string, float>();
         }
