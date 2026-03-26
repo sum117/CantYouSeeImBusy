@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- Settings page: global toggle -->
+  <CYSIB_Settings_ModEnabled>啟用 Can't You See I'm Busy</CYSIB_Settings_ModEnabled>
+  <CYSIB_Settings_Header>控制戰鬥期間每個需求的衰減速度。0% = 凍結，100% = 正常速度。</CYSIB_Settings_Header>
+  <CYSIB_Settings_Disabled>模組已停用 — 所有戰鬥效果已停用。</CYSIB_Settings_Disabled>
+
+  <!-- Settings page: quick-set buttons -->
+  <CYSIB_Settings_FreezeAll>全部凍結</CYSIB_Settings_FreezeAll>
+  <CYSIB_Settings_NormalAll>全部正常</CYSIB_Settings_NormalAll>
+
+  <!-- Settings page: slider status words -->
+  <CYSIB_Settings_StatusFrozen>凍結</CYSIB_Settings_StatusFrozen>
+  <CYSIB_Settings_StatusSlowed>減速</CYSIB_Settings_StatusSlowed>
+  <CYSIB_Settings_StatusNormal>正常</CYSIB_Settings_StatusNormal>
+
+  <!-- Settings page: slider tooltip. {0} = need label, {1} = percentage integer -->
+  <CYSIB_Settings_SliderTooltip>在{1}%時，{0}在戰鬥期間以該速度衰減。</CYSIB_Settings_SliderTooltip>
+
+  <!-- Settings page: reset button -->
+  <CYSIB_Settings_ResetDefaults>重置為預設值</CYSIB_Settings_ResetDefaults>
+
+  <!-- Settings page: protection options -->
+  <CYSIB_Settings_ProtectionOptions>保護選項</CYSIB_Settings_ProtectionOptions>
+  <CYSIB_Settings_BlockBreakdowns>戰鬥期間阻止精神崩潰</CYSIB_Settings_BlockBreakdowns>
+  <CYSIB_Settings_BlockBreakdowns_Tooltip>啟用時，戰鬥中的殖民者將不會有精神崩潰。需求衰減不受此設定影響。</CYSIB_Settings_BlockBreakdowns_Tooltip>
+  <CYSIB_Settings_AllowCubeBreaks>允許立方體塑造崩潰</CYSIB_Settings_AllowCubeBreaks>
+  <CYSIB_Settings_AllowCubeBreaks_Tooltip>啟用時，有立方體成癮的殖民者即使在戰鬥期間且啟用精神崩潰阻斷時，仍然可以進行立方體塑造崩潰。</CYSIB_Settings_AllowCubeBreaks_Tooltip>
+  <CYSIB_Settings_FreezeCaravanNeeds>旅隊組織期間凍結需求</CYSIB_Settings_FreezeCaravanNeeds>
+  <CYSIB_Settings_FreezeCaravanNeeds_Tooltip>啟用時，殖民者在組織旅隊期間需求會被凍結。精神崩潰阻斷（如果啟用）也適用於旅隊組織期間。</CYSIB_Settings_FreezeCaravanNeeds_Tooltip>
+
+</LanguageData>

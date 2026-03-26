@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- Letter notification: mental break blocked during combat -->
+  <CYSIB_MentalBreakBlocked_Label>专注</CYSIB_MentalBreakBlocked_Label>
+  <CYSIB_MentalBreakBlocked_Text>{0} 本会经历精神崩溃，但专注于战斗。</CYSIB_MentalBreakBlocked_Text>
+
+</LanguageData>
