@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+  <!-- Settings page: global toggle -->
+  <CYSIB_Settings_ModEnabled>启用 Can't You See I'm Busy</CYSIB_Settings_ModEnabled>
+  <CYSIB_Settings_Header>控制战斗期间每个需求的衰减速度。0% = 冻结，100% = 正常速度。</CYSIB_Settings_Header>
+  <CYSIB_Settings_Disabled>模组已停用 — 所有战斗效果已停用。</CYSIB_Settings_Disabled>
+
+  <!-- Settings page: quick-set buttons -->
+  <CYSIB_Settings_FreezeAll>全部冻结</CYSIB_Settings_FreezeAll>
+  <CYSIB_Settings_NormalAll>全部正常</CYSIB_Settings_NormalAll>
+
+  <!-- Settings page: slider status words -->
+  <CYSIB_Settings_StatusFrozen>冻结</CYSIB_Settings_StatusFrozen>
+  <CYSIB_Settings_StatusSlowed>减速</CYSIB_Settings_StatusSlowed>
+  <CYSIB_Settings_StatusNormal>正常</CYSIB_Settings_StatusNormal>
+
+  <!-- Settings page: slider tooltip. {0} = need label, {1} = percentage integer -->
+  <CYSIB_Settings_SliderTooltip>在{1}%时，{0}在战斗期间以该速度衰减。</CYSIB_Settings_SliderTooltip>
+
+  <!-- Settings page: reset button -->
+  <CYSIB_Settings_ResetDefaults>重置为预设值</CYSIB_Settings_ResetDefaults>
+
+</LanguageData>
