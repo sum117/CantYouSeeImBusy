@@ -3,7 +3,11 @@
 
   <!-- Hediff: Focused combat state indicator -->
   <!-- Note: HediffDef and ThoughtDef use inline label/description. -->
+<<<<<<< HEAD
   <!-- 本文件用於 C# 代碼引用的異狀相關鍵控字符串。 -->
+=======
+  <!-- This file exists for hediff-related keyed strings referenced from C# code. -->
+>>>>>>> origin/master
   <CYSIB_Focused_Label>專注</CYSIB_Focused_Label>
 
 </LanguageData>
