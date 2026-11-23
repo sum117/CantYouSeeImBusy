@@ -62,3 +62,15 @@ dotnet build Source/CantYouSeeImBusy.csproj -c Release
 This needs the .NET 10 SDK and nothing else. The game and Harmony references come from the [Krafs.Rimworld.Ref](https://www.nuget.org/packages/Krafs.Rimworld.Ref) and [Lib.Harmony.Ref](https://www.nuget.org/packages/Lib.Harmony.Ref) NuGet packages, so RimWorld does not have to be installed.
 
 One build produces both DLLs. The `net472` target goes to `1.6/Assemblies/` and the `net10.0` target goes to `1.7/Assemblies/`.
+
+## Testing
+
+`TestHarness/` is a second, developer-only mod that checks this mod in a running game. It is not uploaded to the Workshop.
+
+On a quick-test map it fires a raid, drafts one colonist and keeps another undrafted as a control. It then logs one `[CYSIB-TEST] CHECK PASS` or `CHECK FAIL` line per check to the game log: needs frozen, mental break blocked, Focused hediff shown, and everything back to normal after combat. It ends with `[CYSIB-TEST] RESULT` and opens the mod settings window.
+
+```bash
+dotnet build TestHarness/Source/CysibTestHarness.csproj -c Release
+```
+
+Put Harmony, this folder and `TestHarness/` in RimWorld's `Mods` folder, enable all three, and start the game with `-quicktest`. Use `-savedatafolder=<path>` to keep the test away from your real saves. The harness targets RimWorld 1.7.

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Can't You See I'm Busy - Test Harness</name>
+  <author>sum117</author>
+  <packageId>sum117.cantyouseeimbusy.testharness</packageId>
+  <supportedVersions>
+    <li>1.7</li>
+  </supportedVersions>
+  <description>Developer tool. Runs a scripted raid on a quick-test map and logs whether Can't You See I'm Busy freezes needs and blocks mental breaks. Do not enable in a real colony.</description>
+  <modDependencies>
+    <li>
+      <packageId>sum117.cantyouseeimbusy</packageId>
+      <displayName>Can't You See I'm Busy</displayName>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>sum117.cantyouseeimbusy</li>
+  </loadAfter>
+</ModMetaData>
