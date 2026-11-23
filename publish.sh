@@ -9,13 +9,14 @@ MOD_DIR_WIN="$(cygpath -w "$MOD_DIR" 2>/dev/null || echo "$MOD_DIR")"
 STAGING_DIR="$MOD_DIR/_publish_staging"
 STAGING_DIR_WIN="$MOD_DIR_WIN\\_publish_staging"
 STEAMCMD="steamcmd"
-CSPROJ="$MOD_DIR/1.6/Source/CantYouSeeImBusy.csproj"
+CSPROJ="$MOD_DIR/Source/CantYouSeeImBusy.csproj"
 ABOUT_XML="$MOD_DIR/About/About.xml"
 
 # Folders to include in the workshop upload
 INCLUDE_DIRS=(
   "1.6/Assemblies"
-  "1.6/Defs"
+  "1.7/Assemblies"
+  "Defs"
   "About"
   "Languages"
 )

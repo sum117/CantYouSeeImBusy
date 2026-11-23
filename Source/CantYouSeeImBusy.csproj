@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net472;net10.0</TargetFrameworks>
+    <AssemblyName>CantYouSeeImBusy</AssemblyName>
+    <Nullable>enable</Nullable>
+    <LangVersion>9.0</LangVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <Deterministic>true</Deterministic>
+    <AssemblyVersion>1.0.6</AssemblyVersion>
+    <FileVersion>1.0.6</FileVersion>
+  </PropertyGroup>
+
+  <!-- RimWorld 1.6 runs on .NET Framework 4.7.2 with Harmony 2. RimWorld 1.7 runs on .NET 10 with Harmony 3. -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net472'">
+    <GameVersion>1.6</GameVersion>
+    <RimRefVersion>1.6.*</RimRefVersion>
+    <HarmonyVersion>2.4.1</HarmonyVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <GameVersion>1.7</GameVersion>
+    <RimRefVersion>1.7.*-*</RimRefVersion>
+    <HarmonyVersion>3.0.0-rc.7</HarmonyVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputPath>$(MSBuildProjectDirectory)/../$(GameVersion)/Assemblies</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="$(RimRefVersion)" />
+    <PackageReference Include="Lib.Harmony.Ref" Version="$(HarmonyVersion)" />
+  </ItemGroup>
+</Project>

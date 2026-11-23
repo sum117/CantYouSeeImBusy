@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>CysibTestHarness</AssemblyName>
+    <Nullable>enable</Nullable>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <OutputPath>$(MSBuildProjectDirectory)/../1.7/Assemblies</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.7.*-*" />
+    <PackageReference Include="Lib.Harmony.Ref" Version="3.0.0-rc.7" />
+  </ItemGroup>
+</Project>

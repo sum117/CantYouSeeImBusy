@@ -19,7 +19,7 @@ namespace CantYouSeeImBusy
         {
             if (!CantYouSeeImBusyMod.Settings.ModEnabled) return true;
 
-            Pawn pawn = (Pawn)PawnField.GetValue(__instance);
+            Pawn pawn = (Pawn)PawnField.GetValue(__instance)!;
 
             // If not protected, allow the original method to run
             if (!CombatEligibility.IsProtected(pawn) && !CombatEligibility.IsCaravanProtected(pawn)) return true;
