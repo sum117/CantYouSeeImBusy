@@ -22,7 +22,7 @@ Only applies to player colonists who are drafted, not downed, and capable of vio
 
 ## Requirements
 
-- RimWorld 1.6
+- RimWorld 1.6 or 1.7
 - [Harmony](https://steamcommunity.com/workshop/filedetails/?id=2009463077)
 
 ## How It Works
@@ -38,30 +38,27 @@ A `CombatStateCache` map component tracks hostiles, draft states, and grace peri
 ## Project Structure
 
 ```
-1.6/
-  Assemblies/          Compiled mod DLL
-  Defs/                HediffDef, ThoughtDef
-  Source/
-    CantYouSeeImBusy.cs                 Main mod class + settings UI
-    CombatEligibility.cs                 Pawn eligibility logic
-    CombatStateCache.cs                  Combat tracking map component
-    FocusedHediffManager.cs              Hediff lifecycle management
-    Patches/
-      Patch_NeedsTrackerTickInterval.cs  Need decay control
-      Patch_TryStartMentalState.cs       Mental break blocking
+1.6/Assemblies/        Compiled mod DLL for RimWorld 1.6 (.NET Framework 4.7.2, Harmony 2)
+1.7/Assemblies/        Compiled mod DLL for RimWorld 1.7 (.NET 10, Harmony 3)
+Defs/                  HediffDef, ThoughtDef
+Source/
+  CantYouSeeImBusy.cs                 Main mod class + settings UI
+  CombatEligibility.cs                 Pawn eligibility logic
+  CombatStateCache.cs                  Combat tracking map component
+  FocusedHediffManager.cs              Hediff lifecycle management
+  Patches/
+    Patch_NeedsTrackerTickInterval.cs  Need decay control
+    Patch_TryStartMentalState.cs       Mental break blocking
 About/                 Mod metadata + preview image
-Languages/English/     Keyed translation strings
+Languages/             Keyed translation strings
 ```
 
 ## Building
 
 ```bash
-dotnet build "1.6/Source/CantYouSeeImBusy.csproj" --no-restore
+dotnet build Source/CantYouSeeImBusy.csproj -c Release
 ```
 
-| Flag | Purpose |
-|------|---------|
-| `"1.6/Source/CantYouSeeImBusy.csproj"` | Path to the project file. Quoted because the path may contain spaces. |
-| `--no-restore` | Skips NuGet package restore. This project has no NuGet dependencies — all references are local DLLs (RimWorld, Unity, Harmony) — so the restore step is unnecessary. |
+This needs the .NET 10 SDK and nothing else. The game and Harmony references come from the [Krafs.Rimworld.Ref](https://www.nuget.org/packages/Krafs.Rimworld.Ref) and [Lib.Harmony.Ref](https://www.nuget.org/packages/Lib.Harmony.Ref) NuGet packages, so RimWorld does not have to be installed.
 
-The compiled DLL is output to `1.6/Assemblies/` as configured by the `<OutputPath>` in the csproj.
+One build produces both DLLs. The `net472` target goes to `1.6/Assemblies/` and the `net10.0` target goes to `1.7/Assemblies/`.
